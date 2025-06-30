@@ -29,121 +29,139 @@
         private void InitializeComponent()
         {
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.btnLogin = new FontAwesome.Sharp.IconButton();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.lblPass = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnShowSignUp = new FontAwesome.Sharp.IconButton();
+            this.btnLogin = new FontAwesome.Sharp.IconButton();
+            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtUsername
             // 
-            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(211, 95);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(5);
+            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUsername.Font = new System.Drawing.Font("Poppins", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Location = new System.Drawing.Point(836, 383);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(458, 34);
+            this.txtUsername.Size = new System.Drawing.Size(319, 35);
             this.txtUsername.TabIndex = 0;
             this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(211, 177);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(5);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(458, 34);
-            this.txtPassword.TabIndex = 1;
-            this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnLogin.IconColor = System.Drawing.Color.Black;
-            this.btnLogin.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnLogin.Location = new System.Drawing.Point(353, 248);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(5);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(113, 45);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // lblUsername
-            // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(206, 50);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(124, 29);
-            this.lblUsername.TabIndex = 3;
-            this.lblUsername.Text = "Username";
-            this.lblUsername.Click += new System.EventHandler(this.lblUsername_Click);
-            // 
-            // lblPass
-            // 
-            this.lblPass.AutoSize = true;
-            this.lblPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPass.Location = new System.Drawing.Point(206, 143);
-            this.lblPass.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblPass.Name = "lblPass";
-            this.lblPass.Size = new System.Drawing.Size(120, 29);
-            this.lblPass.TabIndex = 4;
-            this.lblPass.Text = "Password";
-            this.lblPass.Click += new System.EventHandler(this.lblPass_Click);
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(348, 399);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lblStatus.Font = new System.Drawing.Font("Poppins", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblStatus.Location = new System.Drawing.Point(829, 674);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(142, 29);
+            this.lblStatus.Size = new System.Drawing.Size(0, 40);
             this.lblStatus.TabIndex = 5;
-            this.lblStatus.Text = "WELCOME!";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(836, 485);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(332, 27);
+            this.txtPassword.TabIndex = 1;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // btnShowSignUp
             // 
+            this.btnShowSignUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnShowSignUp.FlatAppearance.BorderSize = 0;
+            this.btnShowSignUp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnShowSignUp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnShowSignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowSignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowSignUp.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowSignUp.ForeColor = System.Drawing.Color.White;
             this.btnShowSignUp.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnShowSignUp.IconColor = System.Drawing.Color.Black;
             this.btnShowSignUp.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnShowSignUp.Location = new System.Drawing.Point(338, 321);
-            this.btnShowSignUp.Margin = new System.Windows.Forms.Padding(5);
+            this.btnShowSignUp.Location = new System.Drawing.Point(1004, 156);
             this.btnShowSignUp.Name = "btnShowSignUp";
-            this.btnShowSignUp.Size = new System.Drawing.Size(152, 39);
+            this.btnShowSignUp.Size = new System.Drawing.Size(98, 39);
             this.btnShowSignUp.TabIndex = 6;
             this.btnShowSignUp.Text = "Signup";
-            this.btnShowSignUp.UseVisualStyleBackColor = true;
+            this.btnShowSignUp.UseVisualStyleBackColor = false;
             this.btnShowSignUp.Click += new System.EventHandler(this.btnShowSignUp_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnLogin.IconColor = System.Drawing.Color.Black;
+            this.btnLogin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnLogin.Location = new System.Drawing.Point(847, 564);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(308, 39);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // iconPictureBox1
+            // 
+            this.iconPictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.iconPictureBox1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.Screenshot_2025_06_29_131357;
+            this.iconPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox1.IconSize = 788;
+            this.iconPictureBox1.Location = new System.Drawing.Point(-9, -4);
+            this.iconPictureBox1.Name = "iconPictureBox1";
+            this.iconPictureBox1.Size = new System.Drawing.Size(1560, 788);
+            this.iconPictureBox1.TabIndex = 7;
+            this.iconPictureBox1.TabStop = false;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(212)))), ((int)(((byte)(218)))));
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.Location = new System.Drawing.Point(887, 156);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(98, 39);
+            this.iconButton1.TabIndex = 8;
+            this.iconButton1.Text = "Log In";
+            this.iconButton1.UseVisualStyleBackColor = false;
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 533);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1542, 741);
+            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnShowSignUp);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.lblPass);
-            this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Controls.Add(this.iconPictureBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.Load += new System.EventHandler(this.LoginForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,11 +170,11 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.TextBox txtPassword;
         private FontAwesome.Sharp.IconButton btnLogin;
-        private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.Label lblStatus;
         private FontAwesome.Sharp.IconButton btnShowSignUp;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private System.Windows.Forms.TextBox txtPassword;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

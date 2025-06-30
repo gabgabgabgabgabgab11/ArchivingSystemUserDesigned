@@ -71,6 +71,13 @@ namespace ArchivingSystemUserDesigned
                     cmd.ExecuteNonQuery();
                 }
             }
+
+                        LogActivity(
+                        "The Admin", 
+                        "Added",
+                        doc.Title,
+                        doc.TypeName,
+                        "Added a new document");
         }
 
         // Update document
@@ -98,11 +105,21 @@ namespace ArchivingSystemUserDesigned
                     cmd.ExecuteNonQuery();
                 }
             }
+                     LogActivity(
+                    "The Admin",
+                    "Edited",
+                    doc.Title,
+                    doc.TypeName,
+                    "Edited document details"
+                );
         }
 
         // Delete document
         public void DeleteDocument(int id)
         {
+            
+            Document doc = GetDocumentById(id);
+
             using (var conn = db.GetConnection())
             {
                 conn.Open();
@@ -111,6 +128,17 @@ namespace ArchivingSystemUserDesigned
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
+            }
+
+            if (doc != null)
+            {
+                DocumentRepository.LogActivity(
+                    "The Admin", // 
+                    "Deleted",
+                    doc.Title,
+                    doc.TypeName,
+                    "Deleted document"
+                );
             }
         }
 
@@ -210,6 +238,88 @@ namespace ArchivingSystemUserDesigned
                     var o = cmd.ExecuteScalar();
                     return o != null ? Convert.ToInt32(o) : 0;
                 }
+            }
+        }
+        public Document GetDocumentById(int id)
+        {
+            using (var conn = db.GetConnection())
+            {
+                conn.Open();
+                string sql = @"
+            SELECT d.*, dt.type_name
+            FROM documents d
+            LEFT JOIN document_types dt ON d.type_id = dt.id
+            WHERE d.id = @id";
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Document
+                            {
+                                Id = reader.GetInt32("id"),
+                                Title = reader.GetString("title"),
+                                Authors = reader.GetString("authors"),
+                                TypeId = reader.GetInt32("type_id"),
+                                TypeName = reader["type_name"].ToString(),
+                                Description = reader["description"]?.ToString() ?? "",
+                                FilePath = reader["file_path"].ToString(),
+                                DateArchived = reader.GetDateTime("date_archived"),
+                                DepartmentId = reader.IsDBNull(reader.GetOrdinal("department_id")) ? 0 : reader.GetInt32("department_id"),
+                                DepartmentName = "" // not used for logging
+                            };
+                        }
+                    }
+                }
+            }
+            return null; // Not found
+        }
+
+        public static class ActivityRepository
+        {
+            public static List<ActivityLog> GetRecentActivities(int count = 20)
+            {
+                var logs = new List<ActivityLog>();
+                using (var conn = new Database().GetConnection())
+                {
+                    conn.Open();
+                    var cmd = new MySqlCommand("SELECT timestamp, username, action, document_title, document_type, details FROM activity_log ORDER BY timestamp DESC LIMIT @count", conn);
+                    cmd.Parameters.AddWithValue("@count", count);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            logs.Add(new ActivityLog
+                            {
+                                Timestamp = reader.IsDBNull(0) ? DateTime.MinValue : reader.GetDateTime(0),
+                                Username = reader.IsDBNull(1) ? "" : reader.GetString(1),
+                                Action = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                DocumentTitle = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                                DocumentType = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                Details = reader.IsDBNull(5) ? "" : reader.GetString(5)
+                            });
+                        }
+                    }
+                }
+                return logs;
+            }
+        }
+
+        public static void LogActivity(string username, string action, string docTitle, string docType, string details)
+        {
+            using (var conn = new Database().GetConnection())
+            {
+                conn.Open();
+                var cmd = new MySqlCommand("INSERT INTO activity_log (timestamp, username, action, document_title, document_type, details) VALUES (@ts, @user, @act, @title, @type, @details)", conn);
+                cmd.Parameters.AddWithValue("@ts", DateTime.Now);
+                cmd.Parameters.AddWithValue("@user", username);
+                cmd.Parameters.AddWithValue("@act", action);
+                cmd.Parameters.AddWithValue("@title", docTitle);
+                cmd.Parameters.AddWithValue("@type", docType);
+                cmd.Parameters.AddWithValue("@details", details);
+                cmd.ExecuteNonQuery();
             }
         }
     }

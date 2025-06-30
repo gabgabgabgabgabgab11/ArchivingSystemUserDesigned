@@ -31,4 +31,14 @@ namespace ArchivingSystemUserDesigned
         public int Id { get; set; }
         public string TypeName { get; set; }
     }
+
+    public class ActivityLog
+    {
+        public DateTime Timestamp { get; set; }
+        public string Username { get; set; }
+        public string Action { get; set; }
+        public string DocumentTitle { get; set; }
+        public string DocumentType { get; set; }
+        public string Details { get; set; }
+    }
 }

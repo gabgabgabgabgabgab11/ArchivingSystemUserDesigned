@@ -79,5 +79,19 @@ namespace ArchivingSystemUserDesigned
 
           
         }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGoLogin_Click(object sender, EventArgs e)
+        {
+            var loginForm = new LoginForm();
+            this.Hide();
+            loginForm.ShowDialog();
+            this.Close();
+
+        }
     }
 }

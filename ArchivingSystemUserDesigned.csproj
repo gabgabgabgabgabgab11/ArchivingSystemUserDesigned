@@ -175,6 +175,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SearchRetrieveControl.resx">
       <DependentUpon>SearchRetrieveControl.cs</DependentUpon>
@@ -195,6 +196,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <None Include="Resources\Screenshot 2025-06-29 131357.png" />
+    <None Include="Resources\Screenshot 2025-06-29 130440.png" />
+    <None Include="Resources\Screenshot 2025-06-29 100819.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

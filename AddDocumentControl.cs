@@ -118,35 +118,48 @@ namespace ArchivingSystemUserDesigned
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
-            // Validation
+            // Validation: only allow OJT to not require pdf file
+            bool isOjt = cmbCategory.SelectedItem.ToString().ToUpper().Contains("OJT");
+
             if (string.IsNullOrWhiteSpace(txtTitle.Text)
                 || string.IsNullOrWhiteSpace(txtAuthors.Text)
-                || string.IsNullOrWhiteSpace(pdfFilePath)
-                || !pdfFilePath.ToLower().EndsWith(".pdf"))
+                || (!isOjt && (string.IsNullOrWhiteSpace(pdfFilePath) || !pdfFilePath.ToLower().EndsWith(".pdf"))))
             {
-                MessageBox.Show("Please fill in all required fields and select a PDF file.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(isOjt
+                    ? "Please fill in all required fields."
+                    : "Please fill in all required fields and select a PDF file.",
+                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+
+            // File handling variables
+            string destFolder = @"C:\ArchivePDFs\";
+            string fileName = "";
+            string destPath = "";
+
+            // Only copy file if there is one (non-OJT, or OJT with file)
+            if (!string.IsNullOrWhiteSpace(pdfFilePath))
+            {
+                if (!System.IO.Directory.Exists(destFolder))
+                    System.IO.Directory.CreateDirectory(destFolder);
+
+                fileName = System.IO.Path.GetFileName(pdfFilePath);
+                destPath = System.IO.Path.Combine(destFolder, fileName);
+                try
+                {
+                    System.IO.File.Copy(pdfFilePath, destPath, true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to copy PDF file: " + ex.Message, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             // Find type_id and department_id from names
             var repo = new DocumentRepository();
             int typeId = repo.GetTypeIdByName(cmbCategory.SelectedItem.ToString());
             int deptId = repo.GetDepartmentIdByName(cmbDepartment.SelectedItem.ToString());
-
-            // Save or copy PDF file to archive folder (optional)
-            string destFolder = @"C:\ArchivePDFs\"; // Change to your desired storage folder
-            if (!System.IO.Directory.Exists(destFolder)) System.IO.Directory.CreateDirectory(destFolder);
-            string fileName = System.IO.Path.GetFileName(pdfFilePath);
-            string destPath = System.IO.Path.Combine(destFolder, fileName);
-            try
-            {
-                System.IO.File.Copy(pdfFilePath, destPath, true);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to copy PDF file: " + ex.Message, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             // Insert into database
             var doc = new Document()
@@ -155,7 +168,7 @@ namespace ArchivingSystemUserDesigned
                 Authors = txtAuthors.Text,
                 TypeId = typeId,
                 DepartmentId = deptId,
-                FilePath = destPath,
+                FilePath = destPath, // Will be "" for OJT with no file
                 Description = txtDescription.Text,
                 DateArchived = DateTime.Now
             };
@@ -164,15 +177,12 @@ namespace ArchivingSystemUserDesigned
                 repo.InsertDocument(doc);
                 MessageBox.Show("Document submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to save document: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void ClearForm()
         {
             txtTitle.Text = "";
