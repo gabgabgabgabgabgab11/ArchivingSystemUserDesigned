@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvRecentActivity = new System.Windows.Forms.DataGridView();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.IconBtnUploadQA = new FontAwesome.Sharp.IconButton();
@@ -45,8 +46,8 @@
             this.lblThesis = new System.Windows.Forms.Label();
             this.gbTotalDocuments = new System.Windows.Forms.GroupBox();
             this.lblDocuments = new System.Windows.Forms.Label();
-            this.dgvRecentActivity = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentActivity)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlStatsSection.SuspendLayout();
             this.gbOther.SuspendLayout();
@@ -54,7 +55,6 @@
             this.gbOjt.SuspendLayout();
             this.gbThesis.SuspendLayout();
             this.gbTotalDocuments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentActivity)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,10 +72,26 @@
             this.panel1.Size = new System.Drawing.Size(1289, 515);
             this.panel1.TabIndex = 4;
             // 
+            // dgvRecentActivity
+            // 
+            this.dgvRecentActivity.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvRecentActivity.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvRecentActivity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRecentActivity.Location = new System.Drawing.Point(129, 54);
+            this.dgvRecentActivity.Name = "dgvRecentActivity";
+            this.dgvRecentActivity.RowHeadersWidth = 51;
+            this.dgvRecentActivity.RowTemplate.Height = 24;
+            this.dgvRecentActivity.Size = new System.Drawing.Size(1155, 456);
+            this.dgvRecentActivity.TabIndex = 5;
+            // 
             // iconButton2
             // 
+            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.iconButton2.FlatAppearance.BorderSize = 0;
+            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton2.ForeColor = System.Drawing.SystemColors.Control;
             this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.Gears;
-            this.iconButton2.IconColor = System.Drawing.Color.Black;
+            this.iconButton2.IconColor = System.Drawing.Color.White;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.Location = new System.Drawing.Point(8, 294);
             this.iconButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -85,13 +101,17 @@
             this.iconButton2.Text = "Manage Documents";
             this.iconButton2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.iconButton2.UseVisualStyleBackColor = true;
+            this.iconButton2.UseVisualStyleBackColor = false;
             this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click);
             // 
             // iconButton1
             // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.Control;
             this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.Location = new System.Drawing.Point(8, 181);
             this.iconButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -101,15 +121,19 @@
             this.iconButton1.Text = "Search Documents";
             this.iconButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconButton1.UseVisualStyleBackColor = false;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // IconBtnUploadQA
             // 
+            this.IconBtnUploadQA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.IconBtnUploadQA.FlatAppearance.BorderSize = 0;
+            this.IconBtnUploadQA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconBtnUploadQA.ForeColor = System.Drawing.Color.White;
             this.IconBtnUploadQA.IconChar = FontAwesome.Sharp.IconChar.FileUpload;
-            this.IconBtnUploadQA.IconColor = System.Drawing.Color.Black;
+            this.IconBtnUploadQA.IconColor = System.Drawing.Color.White;
             this.IconBtnUploadQA.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconBtnUploadQA.Location = new System.Drawing.Point(6, 70);
+            this.IconBtnUploadQA.Location = new System.Drawing.Point(8, 70);
             this.IconBtnUploadQA.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.IconBtnUploadQA.Name = "IconBtnUploadQA";
             this.IconBtnUploadQA.Size = new System.Drawing.Size(115, 103);
@@ -117,14 +141,15 @@
             this.IconBtnUploadQA.Text = "Add New Document";
             this.IconBtnUploadQA.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.IconBtnUploadQA.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.IconBtnUploadQA.UseVisualStyleBackColor = true;
+            this.IconBtnUploadQA.UseVisualStyleBackColor = false;
             this.IconBtnUploadQA.Click += new System.EventHandler(this.IconBtnUploadQA_Click);
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.ForeColor = System.Drawing.SystemColors.Control;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
@@ -135,7 +160,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 18);
@@ -282,31 +307,23 @@
             this.lblDocuments.TabIndex = 8;
             this.lblDocuments.Text = "0";
             // 
-            // dgvRecentActivity
-            // 
-            this.dgvRecentActivity.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvRecentActivity.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvRecentActivity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRecentActivity.Location = new System.Drawing.Point(129, 54);
-            this.dgvRecentActivity.Name = "dgvRecentActivity";
-            this.dgvRecentActivity.RowHeadersWidth = 51;
-            this.dgvRecentActivity.RowTemplate.Height = 24;
-            this.dgvRecentActivity.Size = new System.Drawing.Size(1155, 456);
-            this.dgvRecentActivity.TabIndex = 5;
-            // 
             // DashboardControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.dark_blue_wide_background_with_radial_blurred_gradient_vector;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlStatsSection);
             this.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "DashboardControl";
             this.Size = new System.Drawing.Size(1588, 871);
             this.Load += new System.EventHandler(this.DashboardControl_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentActivity)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlStatsSection.ResumeLayout(false);
@@ -320,7 +337,6 @@
             this.gbThesis.PerformLayout();
             this.gbTotalDocuments.ResumeLayout(false);
             this.gbTotalDocuments.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentActivity)).EndInit();
             this.ResumeLayout(false);
 
         }

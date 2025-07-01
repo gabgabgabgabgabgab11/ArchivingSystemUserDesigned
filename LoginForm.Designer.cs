@@ -31,10 +31,11 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btnShowSignUp = new FontAwesome.Sharp.IconButton();
             this.btnLogin = new FontAwesome.Sharp.IconButton();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.btnViewPassword = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +71,25 @@
             this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(212)))), ((int)(((byte)(218)))));
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.Location = new System.Drawing.Point(887, 156);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(98, 39);
+            this.iconButton1.TabIndex = 8;
+            this.iconButton1.Text = "Log In";
+            this.iconButton1.UseVisualStyleBackColor = false;
             // 
             // btnShowSignUp
             // 
@@ -112,7 +132,7 @@
             // iconPictureBox1
             // 
             this.iconPictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.iconPictureBox1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.Screenshot_2025_06_29_131357;
+            this.iconPictureBox1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.Screenshot_2025_07_01_183217;
             this.iconPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.None;
@@ -125,24 +145,21 @@
             this.iconPictureBox1.TabIndex = 7;
             this.iconPictureBox1.TabStop = false;
             // 
-            // iconButton1
+            // btnViewPassword
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(212)))), ((int)(((byte)(218)))));
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(887, 156);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(98, 39);
-            this.iconButton1.TabIndex = 8;
-            this.iconButton1.Text = "Log In";
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.btnViewPassword.BackColor = System.Drawing.SystemColors.Window;
+            this.btnViewPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnViewPassword.FlatAppearance.BorderSize = 0;
+            this.btnViewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewPassword.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.btnViewPassword.IconColor = System.Drawing.Color.Black;
+            this.btnViewPassword.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnViewPassword.Location = new System.Drawing.Point(1116, 481);
+            this.btnViewPassword.Name = "btnViewPassword";
+            this.btnViewPassword.Size = new System.Drawing.Size(52, 43);
+            this.btnViewPassword.TabIndex = 9;
+            this.btnViewPassword.UseVisualStyleBackColor = false;
+            this.btnViewPassword.Click += new System.EventHandler(this.btnViewPassword_Click);
             // 
             // LoginForm
             // 
@@ -150,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1542, 741);
+            this.Controls.Add(this.btnViewPassword);
             this.Controls.Add(this.iconButton1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.btnShowSignUp);
@@ -176,5 +194,6 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private System.Windows.Forms.TextBox txtPassword;
         private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnViewPassword;
     }
 }

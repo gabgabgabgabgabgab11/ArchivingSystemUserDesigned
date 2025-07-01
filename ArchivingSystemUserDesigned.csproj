@@ -199,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <None Include="Resources\Screenshot 2025-07-01 183433.png" />
+    <None Include="Resources\Screenshot 2025-07-01 183217.png" />
+    <None Include="Resources\dark-blue-wide-background-with-radial-blurred-gradient-vector.jpg" />
     <None Include="Resources\Screenshot 2025-06-29 131357.png" />
     <None Include="Resources\Screenshot 2025-06-29 130440.png" />
     <None Include="Resources\Screenshot 2025-06-29 100819.png" />

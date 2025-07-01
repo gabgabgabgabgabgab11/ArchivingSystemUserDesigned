@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,37 +20,45 @@ namespace ArchivingSystemUserDesigned
         public SearchRetrieveControl()
         {
             InitializeComponent();
-            BuildUI();
-            LoadCategories();
-            LoadDepartments();
-            LoadDocuments();
+            BuildUI();          // Build the UI controls
+            LoadCategories();   // Populate category dropdown
+            LoadDepartments();  // Populate department dropdown
+            LoadDocuments();    // Load all documents
         }
 
+        /// <summary>
+        /// Builds and lays out all controls for search/retrieve UI.
+        /// </summary>
         private void BuildUI()
         {
             this.BackColor = Color.White;
             this.Dock = DockStyle.Fill;
 
+            // Header label
             var lblHeader = new Label()
             {
                 Text = "Search Documents",
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 Location = new Point(30, 20),
-                ForeColor = Color.White
+                ForeColor = Color.White,
+                BackColor = Color.Transparent
             };
             this.Controls.Add(lblHeader);
 
+            // Search term label and textbox
             this.Controls.Add(new Label()
             {
                 Text = "Search Term:",
                 Location = new Point(30, 60),
                 Size = new Size(120, 24),
-                ForeColor = Color.White
+                ForeColor = Color.White,
+                BackColor = Color.Transparent
             });
 
             txtSearch = new TextBox() { Location = new Point(150, 60), Size = new Size(260, 24) };
             this.Controls.Add(txtSearch);
 
+            // Data grid view for displaying results
             dgvResults = new DataGridView()
             {
                 Location = new Point(30, 110),
@@ -65,18 +74,16 @@ namespace ArchivingSystemUserDesigned
             dgvResults.Columns.Add("Title", "Title");
             dgvResults.Columns.Add("Author", "Author");
             dgvResults.Columns.Add("Category", "Category");
-            // PATCH: Add Year Published column
-            dgvResults.Columns.Add("YearPublished", "Year Published");
+            dgvResults.Columns.Add("YearPublished", "Year Published"); // PATCH: Add Year Published column
             dgvResults.Columns.Add("DateAdded", "Date Added");
             dgvResults.Columns.Add(new DataGridViewButtonColumn() { Name = "View", Text = "View File", UseColumnTextForButtonValue = true });
             dgvResults.Columns.Add(new DataGridViewButtonColumn() { Name = "Download", Text = "Download", UseColumnTextForButtonValue = true });
             dgvResults.Columns.Add(new DataGridViewButtonColumn() { Name = "Details", Text = "View Details", UseColumnTextForButtonValue = true });
             dgvResults.CellContentClick += DgvResults_CellContentClick;
             dgvResults.ColumnHeadersHeight = 40;
-
             this.Controls.Add(dgvResults);
 
-            // Initialize buttons BEFORE setting their properties/locations
+            // Search and Clear buttons
             btnSearch = new Button()
             {
                 Text = "Search",
@@ -85,6 +92,7 @@ namespace ArchivingSystemUserDesigned
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
+            btnSearch.FlatAppearance.BorderSize = 0; // Remove border
             btnClear = new Button()
             {
                 Text = "Clear",
@@ -92,19 +100,29 @@ namespace ArchivingSystemUserDesigned
                 BackColor = Color.LightGray,
                 FlatStyle = FlatStyle.Flat
             };
+            btnClear.FlatAppearance.BorderSize = 0; // Remove border
 
+            // Make search and clear buttons roundy
+            MakeButtonRounded(btnSearch, 20);
+            MakeButtonRounded(btnClear, 20);
+
+            // Maintain roundness on resize
+            btnSearch.Resize += (s, e) => MakeButtonRounded(btnSearch, 20);
+            btnClear.Resize += (s, e) => MakeButtonRounded(btnClear, 20);
+
+            // Category and Department filter dropdowns
             int comboY = dgvResults.Location.Y + dgvResults.Height + 40;
-
-            var lblCategory = new Label() { Text = "Category:", Location = new Point(30, comboY), Size = new Size(85, 24), ForeColor = Color.White };
+            var lblCategory = new Label() { Text = "Category:", Location = new Point(30, comboY), Size = new Size(85, 24), ForeColor = Color.White, BackColor = Color.Transparent };
             cmbCategory = new ComboBox() { Location = new Point(115, comboY), Size = new Size(220, 24), DropDownStyle = ComboBoxStyle.DropDownList };
             this.Controls.Add(lblCategory);
             this.Controls.Add(cmbCategory);
 
-            var lblDepartment = new Label() { Text = "Department:", Location = new Point(350, comboY), Size = new Size(105, 24), ForeColor = Color.White };
+            var lblDepartment = new Label() { Text = "Department:", Location = new Point(350, comboY), Size = new Size(105, 24), ForeColor = Color.White, BackColor = Color.Transparent };
             cmbDepartment = new ComboBox() { Location = new Point(455, comboY), Size = new Size(220, 24), DropDownStyle = ComboBoxStyle.DropDownList };
             this.Controls.Add(lblDepartment);
             this.Controls.Add(cmbDepartment);
 
+            // Place buttons below ComboBoxes
             btnSearch.Location = new Point(705, comboY);
             btnClear.Location = new Point(805, comboY);
             this.Controls.Add(btnSearch);
@@ -123,9 +141,28 @@ namespace ArchivingSystemUserDesigned
             cmbDepartment.SelectedIndexChanged += (s, ev) => ApplyFilter();
         }
 
+        /// <summary>
+        /// Helper to make a button have rounded corners.
+        /// </summary>
+        private void MakeButtonRounded(Button btn, int radius = 20)
+        {
+            var rect = btn.ClientRectangle;
+            using (var path = new GraphicsPath())
+            {
+                path.AddArc(0, 0, radius, radius, 180, 90);
+                path.AddArc(rect.Width - radius, 0, radius, radius, 270, 90);
+                path.AddArc(rect.Width - radius, rect.Height - radius, radius, radius, 0, 90);
+                path.AddArc(0, rect.Height - radius, radius, radius, 90, 90);
+                path.CloseAllFigures();
+                btn.Region = new Region(path);
+            }
+        }
+
+        /// <summary>
+        /// Loads document types (categories) into the category ComboBox.
+        /// </summary>
         private void LoadCategories()
         {
-            // Populate category dropdown from document types
             var repo = new DocumentRepository();
             var types = repo.GetAllDocumentTypes();
             types.Insert(0, new DocumentType() { Id = 0, TypeName = "All" });
@@ -134,6 +171,9 @@ namespace ArchivingSystemUserDesigned
             cmbCategory.ValueMember = "Id";
         }
 
+        /// <summary>
+        /// Loads department names into the department ComboBox.
+        /// </summary>
         private void LoadDepartments()
         {
             var repo = new DocumentRepository();
@@ -144,6 +184,9 @@ namespace ArchivingSystemUserDesigned
             cmbDepartment.ValueMember = "Id";
         }
 
+        /// <summary>
+        /// Loads all documents from the repository and applies the current filter.
+        /// </summary>
         public void LoadDocuments()
         {
             var repo = new DocumentRepository();
@@ -151,6 +194,9 @@ namespace ArchivingSystemUserDesigned
             ApplyFilter();
         }
 
+        /// <summary>
+        /// Filters and displays documents based on search term, category, and department.
+        /// </summary>
         private void ApplyFilter()
         {
             if (allDocs == null) return;
@@ -181,7 +227,6 @@ namespace ArchivingSystemUserDesigned
             dgvResults.Rows.Clear();
             foreach (var doc in filtered)
             {
-                // PATCH: Add YearPublished to the grid row
                 int rowIndex = dgvResults.Rows.Add(
                     doc.Title,
                     doc.Authors,
@@ -202,13 +247,11 @@ namespace ArchivingSystemUserDesigned
                 dgvResults.Rows[rowIndex].Cells["View"].ReadOnly = !hasFile;
                 dgvResults.Rows[rowIndex].Cells["Download"].ReadOnly = !hasFile;
 
-                //  visually gray out these buttons for clarity
+                // Visually gray out these buttons for clarity and show tooltip
                 if (!hasFile)
                 {
                     dgvResults.Rows[rowIndex].Cells["View"].Style.ForeColor = Color.Gray;
                     dgvResults.Rows[rowIndex].Cells["Download"].Style.ForeColor = Color.Gray;
-
-                    //show tooltip
                     dgvResults.Rows[rowIndex].Cells["View"].ToolTipText = "No file available";
                     dgvResults.Rows[rowIndex].Cells["Download"].ToolTipText = "No file available";
                 }
@@ -222,6 +265,9 @@ namespace ArchivingSystemUserDesigned
             }
         }
 
+        /// <summary>
+        /// Handles clicks on the DataGridView's special button columns (View, Download, Details).
+        /// </summary>
         private void DgvResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -253,6 +299,7 @@ namespace ArchivingSystemUserDesigned
 
             var doc = filtered[e.RowIndex];
 
+            // Handle View, Download, and Details button clicks
             if (e.ColumnIndex == dgvResults.Columns["View"].Index)
             {
                 ViewDocument(doc.FilePath);
@@ -263,7 +310,6 @@ namespace ArchivingSystemUserDesigned
             }
             else if (e.ColumnIndex == dgvResults.Columns["Details"].Index)
             {
-                // PATCH: Show Year Published in the details dialog
                 MessageBox.Show(
                     $"Title: {doc.Title}\n" +
                     $"Authors: {doc.Authors}\n" +
@@ -278,6 +324,9 @@ namespace ArchivingSystemUserDesigned
             }
         }
 
+        /// <summary>
+        /// Opens the document file in the default PDF viewer.
+        /// </summary>
         private void ViewDocument(string filePath)
         {
             try
@@ -291,6 +340,9 @@ namespace ArchivingSystemUserDesigned
             }
         }
 
+        /// <summary>
+        /// Allows user to download the document to a chosen path.
+        /// </summary>
         private void DownloadDocument(string filePath, string title)
         {
             try

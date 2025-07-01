@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,7 +78,8 @@ namespace ArchivingSystemUserDesigned
 
             Controls.Add(L("Upload Document (PDF):", 10, y));
             txtFilePath = TB(160, y, fieldW - 110); txtFilePath.ReadOnly = true; Controls.Add(txtFilePath);
-            btnBrowse = new Button() { Text = "Choose File", Location = new Point(160 + fieldW - 100, y), Width = 100, Height = 30 };
+            btnBrowse = new Button() { Text = "Choose File", Location = new Point(160 + fieldW - 100, y), Width = 100, Height = 30, BackColor = Color.FromArgb(32, 32, 72), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            btnBrowse.FlatAppearance.BorderSize = 0;
             Controls.Add(btnBrowse);
             y += spacing;
 
@@ -102,6 +104,7 @@ namespace ArchivingSystemUserDesigned
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat
             };
+            btnSubmit.FlatAppearance.BorderSize = 0;
             btnClear = new Button()
             {
                 Text = "Clear Form",
@@ -112,17 +115,43 @@ namespace ArchivingSystemUserDesigned
                 ForeColor = Color.Black,
                 FlatStyle = FlatStyle.Flat
             };
+            btnClear.FlatAppearance.BorderSize = 0;
             Controls.Add(btnSubmit); Controls.Add(btnClear);
+
+            // Make buttons rounded
+            MakeButtonRounded(btnSubmit, 20);
+            MakeButtonRounded(btnClear, 20);
+            MakeButtonRounded(btnBrowse, 15);
+
+            // Maintain roundness on resize
+            btnSubmit.Resize += (s, e) => MakeButtonRounded(btnSubmit, 40);
+            btnClear.Resize += (s, e) => MakeButtonRounded(btnClear, 40);
+            btnBrowse.Resize += (s, e) => MakeButtonRounded(btnBrowse, 45);
 
             btnBrowse.Click += BtnBrowse_Click;
             btnSubmit.Click += BtnSubmit_Click;
             btnClear.Click += (s, e) => ClearForm();
         }
 
+        // Helper to make a button rounded
+        private void MakeButtonRounded(Button btn, int radius = 50)
+        {
+            var rect = btn.ClientRectangle;
+            using (var path = new GraphicsPath())
+            {
+                path.AddArc(0, 0, radius, radius, 180, 90);
+                path.AddArc(rect.Width - radius, 0, radius, radius, 270, 90);
+                path.AddArc(rect.Width - radius, rect.Height - radius, radius, radius, 0, 90);
+                path.AddArc(0, rect.Height - radius, radius, radius, 90, 90);
+                path.CloseAllFigures();
+                btn.Region = new Region(path);
+            }
+        }
+
         Label HeaderLabel(string t, int x, int y)
-           => new Label() { Text = t, Location = new Point(x, y), Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true };
+           => new Label() { Text = t, Location = new Point(x, y), Font = new Font("Segoe UI", 14, FontStyle.Bold), AutoSize = true, BackColor = Color.Transparent };
         Label L(string t, int x, int y)
-            => new Label() { Text = t, Location = new Point(x, y + 4), Width = 140, Font = new Font("Segoe UI", 10) };
+            => new Label() { Text = t, Location = new Point(x, y + 4), Width = 140, Font = new Font("Segoe UI", 10), BackColor = Color.Transparent };
         TextBox TB(int x, int y, int w)
             => new TextBox() { Location = new Point(x, y), Width = w };
 

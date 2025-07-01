@@ -77,5 +77,10 @@ namespace ArchivingSystemUserDesigned
         {
 
         }
+
+        private void btnViewPassword_Click(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = false;
+        }
     }
 }

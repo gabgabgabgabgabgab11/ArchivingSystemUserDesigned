@@ -32,11 +32,11 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.btnGoLogin = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSignUp = new FontAwesome.Sharp.IconButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.btnGoLogin = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -45,10 +45,10 @@
             // 
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(329, 325);
+            this.txtUsername.Location = new System.Drawing.Point(318, 319);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(409, 27);
+            this.txtUsername.Size = new System.Drawing.Size(398, 27);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -56,10 +56,10 @@
             // 
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(329, 452);
+            this.txtPassword.Location = new System.Drawing.Point(318, 443);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(409, 27);
+            this.txtPassword.Size = new System.Drawing.Size(398, 27);
             this.txtPassword.TabIndex = 4;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
@@ -68,7 +68,7 @@
             // 
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmPassword.Location = new System.Drawing.Point(329, 566);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(318, 554);
             this.txtConfirmPassword.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(409, 27);
@@ -84,6 +84,45 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 29);
             this.lblStatus.TabIndex = 8;
+            // 
+            // btnGoLogin
+            // 
+            this.btnGoLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btnGoLogin.FlatAppearance.BorderSize = 0;
+            this.btnGoLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnGoLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnGoLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGoLogin.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGoLogin.ForeColor = System.Drawing.Color.White;
+            this.btnGoLogin.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnGoLogin.IconColor = System.Drawing.Color.Black;
+            this.btnGoLogin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnGoLogin.Location = new System.Drawing.Point(532, 102);
+            this.btnGoLogin.Name = "btnGoLogin";
+            this.btnGoLogin.Size = new System.Drawing.Size(98, 39);
+            this.btnGoLogin.TabIndex = 12;
+            this.btnGoLogin.Text = "Go Log in";
+            this.btnGoLogin.UseVisualStyleBackColor = false;
+            this.btnGoLogin.Click += new System.EventHandler(this.btnGoLogin_Click);
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(212)))), ((int)(((byte)(218)))));
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.Location = new System.Drawing.Point(387, 102);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(98, 39);
+            this.iconButton1.TabIndex = 11;
+            this.iconButton1.Text = "Sign Up";
+            this.iconButton1.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
@@ -104,7 +143,7 @@
             this.btnSignUp.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnSignUp.IconColor = System.Drawing.Color.Black;
             this.btnSignUp.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSignUp.Location = new System.Drawing.Point(329, 638);
+            this.btnSignUp.Location = new System.Drawing.Point(318, 626);
             this.btnSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(409, 58);
@@ -115,52 +154,13 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.Screenshot_2025_06_29_130440;
+            this.pictureBox2.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.Screenshot_2025_07_01_183433;
             this.pictureBox2.Location = new System.Drawing.Point(-169, -85);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(1723, 843);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
-            // 
-            // iconButton1
-            // 
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(212)))), ((int)(((byte)(218)))));
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.iconButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(396, 87);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(98, 39);
-            this.iconButton1.TabIndex = 11;
-            this.iconButton1.Text = "Sign Up";
-            this.iconButton1.UseVisualStyleBackColor = false;
-            // 
-            // btnGoLogin
-            // 
-            this.btnGoLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
-            this.btnGoLogin.FlatAppearance.BorderSize = 0;
-            this.btnGoLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnGoLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnGoLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGoLogin.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGoLogin.ForeColor = System.Drawing.Color.White;
-            this.btnGoLogin.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnGoLogin.IconColor = System.Drawing.Color.Black;
-            this.btnGoLogin.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnGoLogin.Location = new System.Drawing.Point(541, 87);
-            this.btnGoLogin.Name = "btnGoLogin";
-            this.btnGoLogin.Size = new System.Drawing.Size(98, 39);
-            this.btnGoLogin.TabIndex = 12;
-            this.btnGoLogin.Text = "Go Log in";
-            this.btnGoLogin.UseVisualStyleBackColor = false;
-            this.btnGoLogin.Click += new System.EventHandler(this.btnGoLogin_Click);
             // 
             // SignUpForm
             // 
@@ -195,8 +195,8 @@
         private FontAwesome.Sharp.IconButton btnSignUp;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private FontAwesome.Sharp.IconButton iconButton1;
         private FontAwesome.Sharp.IconButton btnGoLogin;
+        public System.Windows.Forms.PictureBox pictureBox2;
     }
 }

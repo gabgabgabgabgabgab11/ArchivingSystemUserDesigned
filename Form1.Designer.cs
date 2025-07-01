@@ -37,10 +37,10 @@
             this.imgHome = new System.Windows.Forms.PictureBox();
             this.btnDashboard = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dashboardControl1 = new ArchivingSystemUserDesigned.DashboardControl();
             this.addDocumentControl1 = new ArchivingSystemUserDesigned.AddDocumentControl();
             this.manageDocumentsControl1 = new ArchivingSystemUserDesigned.ManageDocumentsControl();
             this.searchRetrieveControl1 = new ArchivingSystemUserDesigned.SearchRetrieveControl();
+            this.dashboardControl1 = new ArchivingSystemUserDesigned.DashboardControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgHome)).BeginInit();
             this.panel2.SuspendLayout();
@@ -60,7 +60,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(262, 1055);
+            this.panel1.Size = new System.Drawing.Size(262, 967);
             this.panel1.TabIndex = 0;
             // 
             // btnLogout
@@ -74,7 +74,7 @@
             this.btnLogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLogout.IconSize = 32;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(3, 951);
+            this.btnLogout.Location = new System.Drawing.Point(0, 866);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(11, 0, 22, 0);
@@ -187,16 +187,57 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-            this.panel2.Controls.Add(this.dashboardControl1);
             this.panel2.Controls.Add(this.addDocumentControl1);
             this.panel2.Controls.Add(this.manageDocumentsControl1);
             this.panel2.Controls.Add(this.searchRetrieveControl1);
+            this.panel2.Controls.Add(this.dashboardControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(262, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1386, 1055);
+            this.panel2.Size = new System.Drawing.Size(1386, 967);
             this.panel2.TabIndex = 1;
+            // 
+            // addDocumentControl1
+            // 
+            this.addDocumentControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.addDocumentControl1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.dark_blue_wide_background_with_radial_blurred_gradient_vector;
+            this.addDocumentControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.addDocumentControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addDocumentControl1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addDocumentControl1.Location = new System.Drawing.Point(0, 0);
+            this.addDocumentControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.addDocumentControl1.Name = "addDocumentControl1";
+            this.addDocumentControl1.Size = new System.Drawing.Size(1386, 967);
+            this.addDocumentControl1.TabIndex = 0;
+            this.addDocumentControl1.Visible = false;
+            // 
+            // manageDocumentsControl1
+            // 
+            this.manageDocumentsControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.manageDocumentsControl1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.dark_blue_wide_background_with_radial_blurred_gradient_vector;
+            this.manageDocumentsControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.manageDocumentsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.manageDocumentsControl1.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manageDocumentsControl1.Location = new System.Drawing.Point(0, 0);
+            this.manageDocumentsControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.manageDocumentsControl1.Name = "manageDocumentsControl1";
+            this.manageDocumentsControl1.Size = new System.Drawing.Size(1386, 967);
+            this.manageDocumentsControl1.TabIndex = 2;
+            this.manageDocumentsControl1.Visible = false;
+            // 
+            // searchRetrieveControl1
+            // 
+            this.searchRetrieveControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.searchRetrieveControl1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.dark_blue_wide_background_with_radial_blurred_gradient_vector;
+            this.searchRetrieveControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.searchRetrieveControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchRetrieveControl1.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchRetrieveControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchRetrieveControl1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
+            this.searchRetrieveControl1.Name = "searchRetrieveControl1";
+            this.searchRetrieveControl1.Size = new System.Drawing.Size(1386, 967);
+            this.searchRetrieveControl1.TabIndex = 3;
             // 
             // dashboardControl1
             // 
@@ -204,7 +245,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dashboardControl1.AutoSize = true;
             this.dashboardControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.dashboardControl1.BackgroundImage = global::ArchivingSystemUserDesigned.Properties.Resources.dark_blue_wide_background_with_radial_blurred_gradient_vector;
+            this.dashboardControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dashboardControl1.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dashboardControl1.ForeColor = System.Drawing.SystemColors.Control;
             this.dashboardControl1.Location = new System.Drawing.Point(0, 0);
             this.dashboardControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dashboardControl1.Name = "dashboardControl1";
@@ -212,46 +256,11 @@
             this.dashboardControl1.TabIndex = 1;
             this.dashboardControl1.Load += new System.EventHandler(this.dashboardControl1_Load);
             // 
-            // addDocumentControl1
-            // 
-            this.addDocumentControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-            this.addDocumentControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addDocumentControl1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addDocumentControl1.Location = new System.Drawing.Point(0, 0);
-            this.addDocumentControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addDocumentControl1.Name = "addDocumentControl1";
-            this.addDocumentControl1.Size = new System.Drawing.Size(1386, 1055);
-            this.addDocumentControl1.TabIndex = 0;
-            this.addDocumentControl1.Visible = false;
-            // 
-            // manageDocumentsControl1
-            // 
-            this.manageDocumentsControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-            this.manageDocumentsControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.manageDocumentsControl1.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manageDocumentsControl1.Location = new System.Drawing.Point(0, 0);
-            this.manageDocumentsControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.manageDocumentsControl1.Name = "manageDocumentsControl1";
-            this.manageDocumentsControl1.Size = new System.Drawing.Size(1386, 1055);
-            this.manageDocumentsControl1.TabIndex = 2;
-            this.manageDocumentsControl1.Visible = false;
-            // 
-            // searchRetrieveControl1
-            // 
-            this.searchRetrieveControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-            this.searchRetrieveControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchRetrieveControl1.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchRetrieveControl1.Location = new System.Drawing.Point(0, 0);
-            this.searchRetrieveControl1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.searchRetrieveControl1.Name = "searchRetrieveControl1";
-            this.searchRetrieveControl1.Size = new System.Drawing.Size(1386, 1055);
-            this.searchRetrieveControl1.TabIndex = 3;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1648, 1055);
+            this.ClientSize = new System.Drawing.Size(1648, 967);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

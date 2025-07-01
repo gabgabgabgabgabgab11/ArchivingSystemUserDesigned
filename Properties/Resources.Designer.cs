@@ -63,6 +63,16 @@ namespace ArchivingSystemUserDesigned.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dark_blue_wide_background_with_radial_blurred_gradient_vector {
+            get {
+                object obj = ResourceManager.GetObject("dark-blue-wide-background-with-radial-blurred-gradient-vector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_2025_06_29_100819 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot 2025-06-29 100819", resourceCulture);
@@ -86,6 +96,26 @@ namespace ArchivingSystemUserDesigned.Properties {
         internal static System.Drawing.Bitmap Screenshot_2025_06_29_131357 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot 2025-06-29 131357", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2025_07_01_183217 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2025-07-01 183217", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2025_07_01_183433 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2025-07-01 183433", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
