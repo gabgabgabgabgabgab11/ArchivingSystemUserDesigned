@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.iconButton4 = new FontAwesome.Sharp.IconButton();
+            this.btnLogout = new FontAwesome.Sharp.IconButton();
             this.btnManage = new FontAwesome.Sharp.IconButton();
             this.btnSearchRetrieve = new FontAwesome.Sharp.IconButton();
             this.btnAddDocument = new FontAwesome.Sharp.IconButton();
@@ -49,7 +49,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-            this.panel1.Controls.Add(this.iconButton4);
+            this.panel1.Controls.Add(this.btnLogout);
             this.panel1.Controls.Add(this.btnManage);
             this.panel1.Controls.Add(this.btnSearchRetrieve);
             this.panel1.Controls.Add(this.btnAddDocument);
@@ -63,26 +63,27 @@
             this.panel1.Size = new System.Drawing.Size(262, 1055);
             this.panel1.TabIndex = 0;
             // 
-            // iconButton4
+            // btnLogout
             // 
-            this.iconButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-            this.iconButton4.FlatAppearance.BorderSize = 0;
-            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.DoorOpen;
-            this.iconButton4.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton4.IconSize = 32;
-            this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(3, 951);
-            this.iconButton4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Padding = new System.Windows.Forms.Padding(11, 0, 22, 0);
-            this.iconButton4.Size = new System.Drawing.Size(259, 104);
-            this.iconButton4.TabIndex = 7;
-            this.iconButton4.Text = "Logout";
-            this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton4.UseVisualStyleBackColor = true;
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnLogout.IconChar = FontAwesome.Sharp.IconChar.DoorOpen;
+            this.btnLogout.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnLogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnLogout.IconSize = 32;
+            this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogout.Location = new System.Drawing.Point(3, 951);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Padding = new System.Windows.Forms.Padding(11, 0, 22, 0);
+            this.btnLogout.Size = new System.Drawing.Size(259, 104);
+            this.btnLogout.TabIndex = 7;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // btnManage
             // 
@@ -273,7 +274,7 @@
         private DashboardControl dashboardControl1;
         private ManageDocumentsControl manageDocumentsControl1;
         private FontAwesome.Sharp.IconButton btnDashboard;
-        private FontAwesome.Sharp.IconButton iconButton4;
+        private FontAwesome.Sharp.IconButton btnLogout;
         private FontAwesome.Sharp.IconButton btnManage;
         private FontAwesome.Sharp.IconButton btnSearchRetrieve;
         private FontAwesome.Sharp.IconButton btnAddDocument;

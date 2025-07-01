@@ -15,6 +15,7 @@ namespace ArchivingSystemUserDesigned
         TextBox txtTitle, txtAuthors, txtFilePath, txtDescription;
         ComboBox cmbCategory, cmbDepartment;
         Button btnBrowse, btnSubmit, btnClear;
+        NumericUpDown nudYearPublished;
         string pdfFilePath = "";
 
         public AddDocumentControl()
@@ -47,14 +48,36 @@ namespace ArchivingSystemUserDesigned
                 Width = fieldW,
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            cmbDepartment.Items.AddRange(new string[] { "IT", "CompEng", "EDUC", "DOMT", "HM", "BSA" });
+            cmbDepartment.Items.AddRange(new string[] {
+                        "Information Technology",
+                        "Computer Engineering",
+                        "Education",
+                        "Office Management Technology",
+                        "Hospitality Management",
+                        "Bachelor of Science in Accountancy",
+                        "ENTREPENEURSHIP"
+                    });
             cmbDepartment.SelectedIndex = 0;
             Controls.Add(cmbDepartment);
             y += spacing;
 
+            // Year Published field
+            Controls.Add(L("Year Published:", 10, y));
+            nudYearPublished = new NumericUpDown()
+            {
+                Location = new Point(160, y),
+                Width = 120,
+                Minimum = 1900,
+                Maximum = 2100,
+                Value = DateTime.Now.Year,
+                Font = new Font("Segoe UI", 10)
+            };
+            Controls.Add(nudYearPublished);
+            y += spacing;
+
             Controls.Add(L("Upload Document (PDF):", 10, y));
             txtFilePath = TB(160, y, fieldW - 110); txtFilePath.ReadOnly = true; Controls.Add(txtFilePath);
-            btnBrowse = new Button() { Text = "Choose File", Location = new Point(160 + fieldW - 100, y), Width = 100 , Height = 30 };
+            btnBrowse = new Button() { Text = "Choose File", Location = new Point(160 + fieldW - 100, y), Width = 100, Height = 30 };
             Controls.Add(btnBrowse);
             y += spacing;
 
@@ -145,9 +168,16 @@ namespace ArchivingSystemUserDesigned
 
                 fileName = System.IO.Path.GetFileName(pdfFilePath);
                 destPath = System.IO.Path.Combine(destFolder, fileName);
+                // Check if file already exists in destination
+                if (System.IO.File.Exists(destPath))
+                {
+                    MessageBox.Show("A file with the same name already exists in the archive. Upload aborted.", "Duplicate File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 try
                 {
-                    System.IO.File.Copy(pdfFilePath, destPath, true);
+                    System.IO.File.Copy(pdfFilePath, destPath, false); // false = do not overwrite
                 }
                 catch (Exception ex)
                 {
@@ -170,7 +200,8 @@ namespace ArchivingSystemUserDesigned
                 DepartmentId = deptId,
                 FilePath = destPath, // Will be "" for OJT with no file
                 Description = txtDescription.Text,
-                DateArchived = DateTime.Now
+                DateArchived = DateTime.Now,
+                YearPublished = (int)nudYearPublished.Value // <-- Save Year Published
             };
             try
             {
@@ -189,6 +220,7 @@ namespace ArchivingSystemUserDesigned
             txtAuthors.Text = "";
             cmbCategory.SelectedIndex = 0;
             cmbDepartment.SelectedIndex = 0;
+            nudYearPublished.Value = DateTime.Now.Year;
             txtFilePath.Text = "";
             txtDescription.Text = "";
             pdfFilePath = "";

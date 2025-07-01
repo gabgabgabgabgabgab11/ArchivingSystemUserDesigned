@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArchivingSystemUserDesigned
 {
@@ -11,121 +8,112 @@ namespace ArchivingSystemUserDesigned
     {
         private Database db = new Database();
 
-        // Get all documents with type and department names
+        // Get all documents with type and department names (using stored procedure)
         public List<Document> GetAllDocuments()
         {
             var docs = new List<Document>();
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                string sql = @"
-                    SELECT d.*, dt.type_name, dep.name as department_name 
-                    FROM documents d
-                    LEFT JOIN document_types dt ON d.type_id = dt.id
-                    LEFT JOIN departments dep ON d.department_id = dep.id
-                    ORDER BY d.date_archived DESC";
-                using (var cmd = new MySqlCommand(sql, conn))
-                using (var reader = cmd.ExecuteReader())
+                using (var cmd = new MySqlCommand("GetAllDocuments", conn))
                 {
-                    while (reader.Read())
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        docs.Add(new Document
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32("id"),
-                            Title = reader.GetString("title"),
-                            Authors = reader.GetString("authors"),
-                            TypeId = reader.GetInt32("type_id"),
-                            TypeName = reader["type_name"].ToString(),
-                            Description = reader["description"]?.ToString() ?? "",
-                            FilePath = reader["file_path"].ToString(),
-                            DateArchived = reader.GetDateTime("date_archived"),
-                            DepartmentId = reader.IsDBNull(reader.GetOrdinal("department_id")) ? 0 : reader.GetInt32("department_id"),
-                            DepartmentName = reader["department_name"] is DBNull ? "" : reader["department_name"].ToString()
-                        });
+                            docs.Add(new Document
+                            {
+                                Id = reader.GetInt32("id"),
+                                Title = reader.GetString("title"),
+                                Authors = reader.GetString("authors"),
+                                TypeId = reader.GetInt32("type_id"),
+                                TypeName = reader["type_name"].ToString(),
+                                Description = reader["description"]?.ToString() ?? "",
+                                YearPublished = reader["year_published"] == DBNull.Value ? 0 : Convert.ToInt32(reader["year_published"]),
+                                FilePath = reader["file_path"].ToString(),
+                                DateArchived = reader.GetDateTime("date_archived"),
+                                DepartmentId = reader.IsDBNull(reader.GetOrdinal("department_id")) ? 0 : reader.GetInt32("department_id"),
+                                DepartmentName = reader["department_name"] is DBNull ? "" : reader["department_name"].ToString()
+                            });
+                        }
                     }
                 }
             }
             return docs;
         }
 
-        // Insert new document
+        // Insert new document (using stored procedure)
         public void InsertDocument(Document doc)
         {
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                string sql = @"
-                    INSERT INTO documents 
-                    (title, authors, type_id, description, file_path, date_archived, department_id)
-                    VALUES (@title, @authors, @type_id, @description,
-                            @file_path, @date_archived, @department_id)";
-                using (var cmd = new MySqlCommand(sql, conn))
+                using (var cmd = new MySqlCommand("InsertDocument", conn))
                 {
-                    cmd.Parameters.AddWithValue("@title", doc.Title);
-                    cmd.Parameters.AddWithValue("@authors", doc.Authors);
-                    cmd.Parameters.AddWithValue("@type_id", doc.TypeId);
-                    cmd.Parameters.AddWithValue("@description", doc.Description ?? "");
-                    cmd.Parameters.AddWithValue("@file_path", doc.FilePath);
-                    cmd.Parameters.AddWithValue("@date_archived", doc.DateArchived);
-                    cmd.Parameters.AddWithValue("@department_id", doc.DepartmentId == 0 ? (object)DBNull.Value : doc.DepartmentId);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_title", doc.Title);
+                    cmd.Parameters.AddWithValue("p_authors", doc.Authors);
+                    cmd.Parameters.AddWithValue("p_type_id", doc.TypeId);
+                    cmd.Parameters.AddWithValue("p_description", doc.Description ?? "");
+                    cmd.Parameters.AddWithValue("p_year_published", doc.YearPublished);
+                    cmd.Parameters.AddWithValue("p_file_path", doc.FilePath);
+                    cmd.Parameters.AddWithValue("p_date_archived", doc.DateArchived);
+                    cmd.Parameters.AddWithValue("p_department_id", doc.DepartmentId == 0 ? (object)DBNull.Value : doc.DepartmentId);
                     cmd.ExecuteNonQuery();
                 }
             }
 
-                        LogActivity(
-                        "The Admin", 
-                        "Added",
-                        doc.Title,
-                        doc.TypeName,
-                        "Added a new document");
+            LogActivity(
+                "The Admin",
+                "Added",
+                doc.Title,
+                doc.TypeName,
+                "Added a new document");
         }
 
-        // Update document
+        // Update document (using stored procedure)
         public void UpdateDocument(Document doc)
         {
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                string sql = @"
-                    UPDATE documents SET
-                        title=@title, authors=@authors,
-                        type_id=@type_id, description=@description,
-                        file_path=@file_path, date_archived=@date_archived, department_id=@department_id
-                    WHERE id=@id";
-                using (var cmd = new MySqlCommand(sql, conn))
+                using (var cmd = new MySqlCommand("UpdateDocument", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", doc.Id);
-                    cmd.Parameters.AddWithValue("@title", doc.Title);
-                    cmd.Parameters.AddWithValue("@authors", doc.Authors);
-                    cmd.Parameters.AddWithValue("@type_id", doc.TypeId);
-                    cmd.Parameters.AddWithValue("@description", doc.Description ?? "");
-                    cmd.Parameters.AddWithValue("@file_path", doc.FilePath);
-                    cmd.Parameters.AddWithValue("@date_archived", doc.DateArchived);
-                    cmd.Parameters.AddWithValue("@department_id", doc.DepartmentId == 0 ? (object)DBNull.Value : doc.DepartmentId);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_id", doc.Id);
+                    cmd.Parameters.AddWithValue("p_title", doc.Title);
+                    cmd.Parameters.AddWithValue("p_authors", doc.Authors);
+                    cmd.Parameters.AddWithValue("p_type_id", doc.TypeId);
+                    cmd.Parameters.AddWithValue("p_description", doc.Description ?? "");
+                    cmd.Parameters.AddWithValue("p_year_published", doc.YearPublished);
+                    cmd.Parameters.AddWithValue("p_file_path", doc.FilePath);
+                    cmd.Parameters.AddWithValue("p_date_archived", doc.DateArchived);
+                    cmd.Parameters.AddWithValue("p_department_id", doc.DepartmentId == 0 ? (object)DBNull.Value : doc.DepartmentId);
                     cmd.ExecuteNonQuery();
                 }
             }
-                     LogActivity(
-                    "The Admin",
-                    "Edited",
-                    doc.Title,
-                    doc.TypeName,
-                    "Edited document details"
-                );
+            LogActivity(
+                "The Admin",
+                "Edited",
+                doc.Title,
+                doc.TypeName,
+                "Edited document details"
+            );
         }
 
-        // Delete document
+        // Delete document (using stored procedure)
         public void DeleteDocument(int id)
         {
-            
             Document doc = GetDocumentById(id);
 
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("DELETE FROM documents WHERE id=@id", conn))
+                using (var cmd = new MySqlCommand("DeleteDocument", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -133,7 +121,7 @@ namespace ArchivingSystemUserDesigned
             if (doc != null)
             {
                 DocumentRepository.LogActivity(
-                    "The Admin", // 
+                    "The Admin",
                     "Deleted",
                     doc.Title,
                     doc.TypeName,
@@ -142,117 +130,131 @@ namespace ArchivingSystemUserDesigned
             }
         }
 
-        // Dashboard stats (total, by type)
+        // Dashboard stats (total, by type) (unchanged: still raw SQL)
         public (int total, Dictionary<string, int> byType) GetDocumentStats()
         {
-
             int total = 0;
             var byType = new Dictionary<string, int>();
+
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM documents", conn))
+                using (var cmd = new MySqlCommand("GetDocumentStats", conn))
                 {
-                    total = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                string sql = @"
-            SELECT dt.type_name, COUNT(*) as count
-            FROM documents d
-            JOIN document_types dt ON d.type_id = dt.id
-            GROUP BY dt.type_name";
-                using (var cmd = new MySqlCommand(sql, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                        byType[reader.GetString("type_name")] = reader.GetInt32("count");
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        // First result set: total count
+                        if (reader.Read())
+                            total = Convert.ToInt32(reader["total"]);
+
+                        // Move to next result set: type counts
+                        if (reader.NextResult())
+                        {
+                            while (reader.Read())
+                            {
+                                byType[reader.GetString("type_name")] = reader.GetInt32("count");
+                            }
+                        }
+                    }
                 }
             }
             return (total, byType);
-
         }
 
-        // Get all document types
+        // Get all document types (using stored procedure)
         public List<DocumentType> GetAllDocumentTypes()
         {
             var types = new List<DocumentType>();
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT * FROM document_types", conn))
-                using (var reader = cmd.ExecuteReader())
+                using (var cmd = new MySqlCommand("GetAllDocumentTypes", conn))
                 {
-                    while (reader.Read())
-                        types.Add(new DocumentType
-                        {
-                            Id = reader.GetInt32("id"),
-                            TypeName = reader.GetString("type_name")
-                        });
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            types.Add(new DocumentType
+                            {
+                                Id = reader.GetInt32("id"),
+                                TypeName = reader.GetString("type_name")
+                            });
+                    }
                 }
             }
             return types;
         }
 
-        // Get all departments
+        // Get all departments (using stored procedure)
         public List<Department> GetAllDepartments()
         {
             var deps = new List<Department>();
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT * FROM departments", conn))
-                using (var reader = cmd.ExecuteReader())
+                using (var cmd = new MySqlCommand("GetAllDepartments", conn))
                 {
-                    while (reader.Read())
-                        deps.Add(new Department
-                        {
-                            Id = reader.GetInt32("id"),
-                            Name = reader.GetString("name")
-                        });
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            deps.Add(new Department
+                            {
+                                Id = reader.GetInt32("id"),
+                                Name = reader.GetString("name")
+                            });
+                    }
                 }
             }
             return deps;
         }
 
+        // Get type id by name (still inline SQL, can be made a procedure if desired)
         public int GetTypeIdByName(string typeName)
         {
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT id FROM document_types WHERE type_name=@type", conn))
+                using (var cmd = new MySqlCommand("GetTypeIdByName", conn))
                 {
-                    cmd.Parameters.AddWithValue("@type", typeName);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_type_name", typeName);
                     var o = cmd.ExecuteScalar();
                     return o != null ? Convert.ToInt32(o) : 0;
                 }
             }
         }
 
+
+        // Get department id by name (still inline SQL, can be made a procedure if desired)
         public int GetDepartmentIdByName(string deptName)
         {
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                using (var cmd = new MySqlCommand("SELECT id FROM departments WHERE name=@name", conn))
+                using (var cmd = new MySqlCommand("GetDepartmentIdByName", conn))
                 {
-                    cmd.Parameters.AddWithValue("@name", deptName);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_dept_name", deptName);
                     var o = cmd.ExecuteScalar();
                     return o != null ? Convert.ToInt32(o) : 0;
                 }
             }
         }
+
+
+        // Get document by ID (using stored procedure)
         public Document GetDocumentById(int id)
         {
             using (var conn = db.GetConnection())
             {
                 conn.Open();
-                string sql = @"
-            SELECT d.*, dt.type_name
-            FROM documents d
-            LEFT JOIN document_types dt ON d.type_id = dt.id
-            WHERE d.id = @id";
-                using (var cmd = new MySqlCommand(sql, conn))
+                using (var cmd = new MySqlCommand("GetDocumentById", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_id", id);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
@@ -265,10 +267,11 @@ namespace ArchivingSystemUserDesigned
                                 TypeId = reader.GetInt32("type_id"),
                                 TypeName = reader["type_name"].ToString(),
                                 Description = reader["description"]?.ToString() ?? "",
+                                YearPublished = reader["year_published"] == DBNull.Value ? 0 : Convert.ToInt32(reader["year_published"]),
                                 FilePath = reader["file_path"].ToString(),
                                 DateArchived = reader.GetDateTime("date_archived"),
                                 DepartmentId = reader.IsDBNull(reader.GetOrdinal("department_id")) ? 0 : reader.GetInt32("department_id"),
-                                DepartmentName = "" // not used for logging
+                                DepartmentName = reader["department_name"] is DBNull ? "" : reader["department_name"].ToString()
                             };
                         }
                     }
@@ -279,27 +282,31 @@ namespace ArchivingSystemUserDesigned
 
         public static class ActivityRepository
         {
+            // Get recent activities (using stored procedure)
             public static List<ActivityLog> GetRecentActivities(int count = 20)
             {
                 var logs = new List<ActivityLog>();
                 using (var conn = new Database().GetConnection())
                 {
                     conn.Open();
-                    var cmd = new MySqlCommand("SELECT timestamp, username, action, document_title, document_type, details FROM activity_log ORDER BY timestamp DESC LIMIT @count", conn);
-                    cmd.Parameters.AddWithValue("@count", count);
-                    using (var reader = cmd.ExecuteReader())
+                    using (var cmd = new MySqlCommand("GetRecentActivities", conn))
                     {
-                        while (reader.Read())
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("p_limit", count);
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            logs.Add(new ActivityLog
+                            while (reader.Read())
                             {
-                                Timestamp = reader.IsDBNull(0) ? DateTime.MinValue : reader.GetDateTime(0),
-                                Username = reader.IsDBNull(1) ? "" : reader.GetString(1),
-                                Action = reader.IsDBNull(2) ? "" : reader.GetString(2),
-                                DocumentTitle = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                                DocumentType = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                Details = reader.IsDBNull(5) ? "" : reader.GetString(5)
-                            });
+                                logs.Add(new ActivityLog
+                                {
+                                    Timestamp = reader.IsDBNull(reader.GetOrdinal("timestamp")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("timestamp")),
+                                    Username = reader.IsDBNull(reader.GetOrdinal("username")) ? "" : reader.GetString(reader.GetOrdinal("username")),
+                                    Action = reader.IsDBNull(reader.GetOrdinal("action")) ? "" : reader.GetString(reader.GetOrdinal("action")),
+                                    DocumentTitle = reader.IsDBNull(reader.GetOrdinal("document_title")) ? "" : reader.GetString(reader.GetOrdinal("document_title")),
+                                    DocumentType = reader.IsDBNull(reader.GetOrdinal("document_type")) ? "" : reader.GetString(reader.GetOrdinal("document_type")),
+                                    Details = reader.IsDBNull(reader.GetOrdinal("details")) ? "" : reader.GetString(reader.GetOrdinal("details"))
+                                });
+                            }
                         }
                     }
                 }
@@ -307,19 +314,23 @@ namespace ArchivingSystemUserDesigned
             }
         }
 
+        // Log activity (using stored procedure)
         public static void LogActivity(string username, string action, string docTitle, string docType, string details)
         {
             using (var conn = new Database().GetConnection())
             {
                 conn.Open();
-                var cmd = new MySqlCommand("INSERT INTO activity_log (timestamp, username, action, document_title, document_type, details) VALUES (@ts, @user, @act, @title, @type, @details)", conn);
-                cmd.Parameters.AddWithValue("@ts", DateTime.Now);
-                cmd.Parameters.AddWithValue("@user", username);
-                cmd.Parameters.AddWithValue("@act", action);
-                cmd.Parameters.AddWithValue("@title", docTitle);
-                cmd.Parameters.AddWithValue("@type", docType);
-                cmd.Parameters.AddWithValue("@details", details);
-                cmd.ExecuteNonQuery();
+                using (var cmd = new MySqlCommand("LogActivity", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_timestamp", DateTime.Now);
+                    cmd.Parameters.AddWithValue("p_username", username);
+                    cmd.Parameters.AddWithValue("p_action", action);
+                    cmd.Parameters.AddWithValue("p_document_title", docTitle);
+                    cmd.Parameters.AddWithValue("p_document_type", docType);
+                    cmd.Parameters.AddWithValue("p_details", details);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }

@@ -61,12 +61,12 @@ namespace ArchivingSystemUserDesigned
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 BackgroundColor = Color.White,
-                
-                
             };
             dgvResults.Columns.Add("Title", "Title");
             dgvResults.Columns.Add("Author", "Author");
             dgvResults.Columns.Add("Category", "Category");
+            // PATCH: Add Year Published column
+            dgvResults.Columns.Add("YearPublished", "Year Published");
             dgvResults.Columns.Add("DateAdded", "Date Added");
             dgvResults.Columns.Add(new DataGridViewButtonColumn() { Name = "View", Text = "View File", UseColumnTextForButtonValue = true });
             dgvResults.Columns.Add(new DataGridViewButtonColumn() { Name = "Download", Text = "Download", UseColumnTextForButtonValue = true });
@@ -181,12 +181,19 @@ namespace ArchivingSystemUserDesigned
             dgvResults.Rows.Clear();
             foreach (var doc in filtered)
             {
-                int rowIndex = dgvResults.Rows.Add(doc.Title, doc.Authors, doc.TypeName, doc.DateArchived.ToString("yyyy-MM-dd"), "View", "Download", "View Details");
+                // PATCH: Add YearPublished to the grid row
+                int rowIndex = dgvResults.Rows.Add(
+                    doc.Title,
+                    doc.Authors,
+                    doc.TypeName,
+                    doc.YearPublished > 0 ? doc.YearPublished.ToString() : "", // Display empty if not set
+                    doc.DateArchived.ToString("yyyy-MM-dd"),
+                    "View", "Download", "View Details"
+                );
 
                 bool hasFile = !string.IsNullOrWhiteSpace(doc.FilePath);
 
                 // Show/hide/enable buttons accordingly
-              
                 dgvResults.Rows[rowIndex].Cells["View"].Value = "View";
                 dgvResults.Rows[rowIndex].Cells["Download"].Value = "Download";
                 dgvResults.Rows[rowIndex].Cells["Details"].Value = "View Details";
@@ -256,13 +263,14 @@ namespace ArchivingSystemUserDesigned
             }
             else if (e.ColumnIndex == dgvResults.Columns["Details"].Index)
             {
-                // Show a MessageBox or your own details form
+                // PATCH: Show Year Published in the details dialog
                 MessageBox.Show(
                     $"Title: {doc.Title}\n" +
                     $"Authors: {doc.Authors}\n" +
                     $"Category: {doc.TypeName}\n" +
                     $"Department: {doc.DepartmentName}\n" +
                     $"Description: {doc.Description}\n" +
+                    $"Year Published: {(doc.YearPublished > 0 ? doc.YearPublished.ToString() : "N/A")}\n" +
                     $"Date Archived: {doc.DateArchived:yyyy-MM-dd}",
                     "Document Details",
                     MessageBoxButtons.OK,

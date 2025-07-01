@@ -16,6 +16,7 @@ namespace ArchivingSystemUserDesigned
         public string Description { get; set; } // Formerly Abstract
         public string FilePath { get; set; }
         public DateTime DateArchived { get; set; }
+        public int YearPublished { get; set; } 
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; } // For JOIN
     }

@@ -71,6 +71,7 @@ namespace ArchivingSystemUserDesigned
             dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Type", DataPropertyName = "TypeName", Width = 100 });
             dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Dept.", DataPropertyName = "DepartmentName", Width = 110 });
             dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Description", DataPropertyName = "Description", Width = 200 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Year Published", DataPropertyName = "YearPublished", Width = 80 });
             dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "File Path", DataPropertyName = "FilePath", Width = 120 });
             dgv.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Date Archived", DataPropertyName = "DateArchived", Width = 110, DefaultCellStyle = new DataGridViewCellStyle() { Format = "yyyy-MM-dd" } });
             dgv.ColumnHeadersHeight = 40;
